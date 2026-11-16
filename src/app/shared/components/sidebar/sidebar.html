@@ -1,0 +1,64 @@
+
+<aside class="sidebar">
+
+  <div class="brand">
+    <div class="brand-icon">P</div>
+    <div>
+      <h2>ProjectHub</h2>
+      <span>Management System</span>
+    </div>
+  </div>
+
+  <div class="menu-label">WORKSPACE</div>
+
+  <nav class="nav-menu">
+
+    <a routerLink="/dashboard" routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: true }">
+      <span>▦</span> Dashboard
+    </a>
+
+    <a routerLink="/projects" routerLinkActive="active">
+      <span>📁</span> Projects
+    </a>
+
+    <a routerLink="/tasks" routerLinkActive="active">
+      <span>☑</span> Tasks
+    </a>
+
+    <a routerLink="/tasks/kanban" routerLinkActive="active">
+      <span>▤</span> Kanban Board
+    </a>
+
+    <a routerLink="/team" routerLinkActive="active">
+      <span>♙</span> Team
+    </a>
+
+    <a routerLink="/calendar" routerLinkActive="active">
+      <span>▦</span> Calendar
+    </a>
+
+    <a routerLink="/reports" routerLinkActive="active">
+      <span>▥</span> Reports
+    </a>
+
+  </nav>
+
+  <div class="menu-label settings-label">PREFERENCES</div>
+
+  <nav class="nav-menu">
+    <a routerLink="/settings" routerLinkActive="active">
+      <span>⚙</span> Settings
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="profile-avatar">SK</div>
+    <div class="profile-info">
+      <strong>Shreyash Katiyar</strong>
+      <span>Administrator</span>
+    </div>
+    <span class="online-dot"></span>
+  </div>
+
+</aside>

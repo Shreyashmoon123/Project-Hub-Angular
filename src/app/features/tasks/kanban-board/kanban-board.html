@@ -1,0 +1,101 @@
+
+<div class="kanban-page">
+
+  <div class="kanban-header">
+    <div>
+      <h2>Kanban Board</h2>
+      <p>Manage your tasks by changing their status.</p>
+    </div>
+  </div>
+
+  <div class="kanban-board">
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <h3>Pending</h3>
+        <span>{{ getTasks('Pending').length }}</span>
+      </div>
+
+      @for (task of getTasks('Pending'); track task.id) {
+        <div class="kanban-card">
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.description }}</p>
+          <div class="task-info">
+            <span>{{ task.assignedTo }}</span>
+            <span class="priority" [class]="task.priority.toLowerCase()">
+              {{ task.priority }}
+            </span>
+          </div>
+          <label>Change Status</label>
+          <select #status [value]="task.status"
+            (change)="changeStatus(task.id, status.value === 'Completed' ? 'Completed' : status.value === 'In Progress' ? 'In Progress' : 'Pending')">
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      } @empty {
+        <p class="empty-message">No pending tasks</p>
+      }
+    </div>
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <h3>In Progress</h3>
+        <span>{{ getTasks('In Progress').length }}</span>
+      </div>
+
+      @for (task of getTasks('In Progress'); track task.id) {
+        <div class="kanban-card">
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.description }}</p>
+          <div class="task-info">
+            <span>{{ task.assignedTo }}</span>
+            <span class="priority" [class]="task.priority.toLowerCase()">
+              {{ task.priority }}
+            </span>
+          </div>
+          <label>Change Status</label>
+          <select #status [value]="task.status"
+            (change)="changeStatus(task.id, status.value === 'Completed' ? 'Completed' : status.value === 'In Progress' ? 'In Progress' : 'Pending')">
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      } @empty {
+        <p class="empty-message">No tasks in progress</p>
+      }
+    </div>
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <h3>Completed</h3>
+        <span>{{ getTasks('Completed').length }}</span>
+      </div>
+
+      @for (task of getTasks('Completed'); track task.id) {
+        <div class="kanban-card">
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.description }}</p>
+          <div class="task-info">
+            <span>{{ task.assignedTo }}</span>
+            <span class="priority" [class]="task.priority.toLowerCase()">
+              {{ task.priority }}
+            </span>
+          </div>
+          <label>Change Status</label>
+          <select #status [value]="task.status"
+            (change)="changeStatus(task.id, status.value === 'Completed' ? 'Completed' : status.value === 'In Progress' ? 'In Progress' : 'Pending')">
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      } @empty {
+        <p class="empty-message">No completed tasks</p>
+      }
+    </div>
+
+  </div>
+</div>

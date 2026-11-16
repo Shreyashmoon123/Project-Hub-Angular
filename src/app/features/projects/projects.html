@@ -1,0 +1,238 @@
+
+<div class="projects-page">
+
+  <div class="page-header">
+    <div>
+      <h2>Projects</h2>
+      <p>Manage and track all your projects.</p>
+    </div>
+
+    <button class="add-btn" (click)="openForm()">
+      + Add Project
+    </button>
+  </div>
+
+  @if (showForm) {
+    <div class="form-container">
+
+      <div class="form-header">
+        <h3>
+          {{ editingId !== null ? 'Edit Project' : 'Add New Project' }}
+        </h3>
+
+        <button class="close-btn" (click)="closeForm()">
+          ✕
+        </button>
+      </div>
+
+      <form (ngSubmit)="saveProject()" #projectForm="ngForm">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Project Name</label>
+            <input
+              type="text"
+              name="name"
+              [(ngModel)]="newProject.name"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Category</label>
+            <input
+              type="text"
+              name="category"
+              [(ngModel)]="newProject.category"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Start Date</label>
+            <input
+              type="date"
+              name="startDate"
+              [(ngModel)]="newProject.startDate"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Due Date</label>
+            <input
+              type="date"
+              name="dueDate"
+              [(ngModel)]="newProject.dueDate"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Status</label>
+            <select
+              name="status"
+              [(ngModel)]="newProject.status">
+
+              <option value="Planning">Planning</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Progress (%)</label>
+            <input
+              type="number"
+              name="progress"
+              [(ngModel)]="newProject.progress"
+              min="0"
+              max="100"
+              required>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Description</label>
+            <textarea
+              name="description"
+              [(ngModel)]="newProject.description"
+              required>
+            </textarea>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="closeForm()">
+            Cancel
+          </button>
+
+          <button type="submit" class="save-btn">
+            {{ editingId !== null ? 'Update Project' : 'Save Project' }}
+          </button>
+
+        </div>
+
+      </form>
+    </div>
+  }
+
+  <div class="project-summary">
+
+    <div class="summary-card">
+      <h3>{{ projects.length }}</h3>
+      <p>Total Projects</p>
+    </div>
+
+    <div class="summary-card">
+      <h3>
+        {{ projects.filter(p => p.status === 'In Progress').length }}
+      </h3>
+      <p>In Progress</p>
+    </div>
+
+    <div class="summary-card">
+      <h3>
+        {{ projects.filter(p => p.status === 'Completed').length }}
+      </h3>
+      <p>Completed</p>
+    </div>
+
+  </div>
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>Category</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Progress</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (project of projects; track project.id) {
+
+          <tr>
+
+            <td>
+              <strong>{{ project.name }}</strong>
+              <small>{{ project.description }}</small>
+            </td>
+
+            <td>{{ project.category }}</td>
+
+            <td>{{ project.startDate }}</td>
+
+            <td>{{ project.dueDate }}</td>
+
+            <td>
+              <div class="progress-container">
+
+                <div class="progress-bar">
+                  <div [style.width.%]="project.progress"></div>
+                </div>
+
+                <small>{{ project.progress }}%</small>
+
+              </div>
+            </td>
+
+            <td>
+              <span
+                class="status"
+                [class.planning]="project.status === 'Planning'"
+                [class.in-progress]="project.status === 'In Progress'"
+                [class.completed]="project.status === 'Completed'">
+
+                {{ project.status }}
+
+              </span>
+            </td>
+
+            <td>
+              <div class="action-buttons">
+
+                <button
+                  class="edit-btn"
+                  (click)="editProject(project)">
+                  Edit
+                </button>
+
+                <button
+                  class="delete-btn"
+                  (click)="deleteProject(project.id)">
+                  Delete
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+        } @empty {
+
+          <tr>
+            <td colspan="7" class="empty-row">
+              No projects found. Add your first project!
+            </td>
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

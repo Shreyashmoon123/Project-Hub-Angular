@@ -1,0 +1,146 @@
+
+<div class="team-page">
+
+  <div class="page-header">
+    <div>
+      <h2>Team Management</h2>
+      <p>Manage your team members and their roles.</p>
+    </div>
+
+    <button class="add-btn" (click)="openForm()">+ Add Member</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span>Total Members</span>
+      <h2>{{ members.length }}</h2>
+    </div>
+
+    <div class="stat-card">
+      <span>Active Members</span>
+      <h2>{{ activeMembers }}</h2>
+    </div>
+
+    <div class="stat-card">
+      <span>Inactive Members</span>
+      <h2>{{ inactiveMembers }}</h2>
+    </div>
+  </div>
+
+  @if (showForm) {
+    <div class="form-overlay">
+      <div class="member-form">
+        <h3>{{ editingId !== null ? 'Edit Member' : 'Add New Member' }}</h3>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" [(ngModel)]="newMember.name" placeholder="Enter name">
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="newMember.email" placeholder="Enter email">
+          </div>
+
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" [(ngModel)]="newMember.phone" placeholder="Enter phone">
+          </div>
+
+          <div class="form-group">
+            <label>Role</label>
+            <select [(ngModel)]="newMember.role">
+              <option value="Admin">Admin</option>
+              <option value="Manager">Manager</option>
+              <option value="Developer">Developer</option>
+              <option value="Designer">Designer</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Department</label>
+            <input type="text" [(ngModel)]="newMember.department" placeholder="Enter department">
+          </div>
+
+          <div class="form-group">
+            <label>Status</label>
+            <select [(ngModel)]="newMember.status">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Joining Date</label>
+            <input type="date" [(ngModel)]="newMember.joiningDate">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="cancel-btn" (click)="closeForm()">Cancel</button>
+          <button class="save-btn" (click)="saveMember()">
+            {{ editingId !== null ? 'Update Member' : 'Save Member' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="table-container">
+    <div class="table-header">
+      <h3>Team Members</h3>
+      <span>{{ members.length }} Members</span>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Department</th>
+            <th>Joining Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (member of members; track member.id) {
+            <tr>
+              <td>
+                <div class="member-info">
+                  <div class="avatar">{{ member.avatar }}</div>
+                  <strong>{{ member.name }}</strong>
+                </div>
+              </td>
+              <td>{{ member.email }}</td>
+              <td>{{ member.role }}</td>
+              <td>{{ member.department }}</td>
+              <td>{{ member.joiningDate }}</td>
+              <td>
+                <span class="status" [class.active]="member.status === 'Active'"
+                  [class.inactive]="member.status === 'Inactive'">
+                  {{ member.status }}
+                </span>
+              </td>
+              <td>
+                <div class="actions">
+                  <button class="edit-btn" (click)="editMember(member)">Edit</button>
+                  <button class="delete-btn" (click)="deleteMember(member.id)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="empty-state">No team members found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

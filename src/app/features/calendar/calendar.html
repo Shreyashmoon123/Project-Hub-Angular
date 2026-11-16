@@ -1,0 +1,86 @@
+
+<div class="calendar-page">
+
+  <div class="page-header">
+    <div>
+      <h2>Calendar</h2>
+      <p>Track your tasks and project deadlines.</p>
+    </div>
+
+    <button class="today-btn" (click)="goToToday()">Today</button>
+  </div>
+
+  <div class="calendar-container">
+
+    <div class="calendar-toolbar">
+      <div class="month-title">
+        <h3>{{ monthYear }}</h3>
+      </div>
+
+      <div class="month-actions">
+        <button (click)="previousMonth()">&#8249;</button>
+        <button (click)="nextMonth()">&#8250;</button>
+      </div>
+    </div>
+
+    <div class="calendar-grid">
+
+      <div class="weekday">Monday</div>
+      <div class="weekday">Tuesday</div>
+      <div class="weekday">Wednesday</div>
+      <div class="weekday">Thursday</div>
+      <div class="weekday">Friday</div>
+      <div class="weekday">Saturday</div>
+      <div class="weekday">Sunday</div>
+
+      @for (day of calendarDays; track day.dateKey) {
+        <div
+          class="calendar-day"
+          [class.other-month]="!day.currentMonth"
+          [class.today]="day.today">
+
+          <div class="day-number">
+            <span>{{ day.dayNumber }}</span>
+            @if (day.today) {
+              <small>Today</small>
+            }
+          </div>
+
+          <div class="day-events">
+
+            @for (task of getTasksForDate(day.dateKey); track task.id) {
+              <div class="event task-event"
+                [title]="task.title + ' - ' + task.status">
+                <span class="event-dot"></span>
+                <span class="event-name">{{ task.title }}</span>
+              </div>
+            }
+
+            @for (project of getProjectsForDate(day.dateKey); track project.id) {
+              <div class="event project-event"
+                [title]="project.name + ' - Project deadline'">
+                <span class="event-dot"></span>
+                <span class="event-name">{{ project.name }}</span>
+              </div>
+            }
+
+          </div>
+        </div>
+      }
+
+    </div>
+
+    <div class="calendar-legend">
+      <div>
+        <span class="legend-dot task-dot"></span>
+        Tasks
+      </div>
+
+      <div>
+        <span class="legend-dot project-dot"></span>
+        Project Deadlines
+      </div>
+    </div>
+
+  </div>
+</div>

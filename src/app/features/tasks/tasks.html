@@ -1,0 +1,261 @@
+
+<div class="tasks-page">
+
+  <div class="page-header">
+    <div>
+      <h2>Tasks</h2>
+      <p>Manage and track all your tasks.</p>
+    </div>
+
+    <button class="add-btn" (click)="openForm()">
+      + Add Task
+    </button>
+  </div>
+
+  <div class="task-summary">
+
+    <div class="summary-card">
+      <h3>{{ tasks.length }}</h3>
+      <p>Total Tasks</p>
+    </div>
+
+    <div class="summary-card">
+      <h3>{{ pendingTasks }}</h3>
+      <p>Pending Tasks</p>
+    </div>
+
+    <div class="summary-card">
+      <h3>{{ inProgressTasks }}</h3>
+      <p>In Progress</p>
+    </div>
+
+    <div class="summary-card">
+      <h3>{{ completedTasks }}</h3>
+      <p>Completed Tasks</p>
+    </div>
+
+  </div>
+
+  @if (showForm) {
+    <div class="form-container">
+
+      <div class="form-header">
+        <h3>
+          {{ editingId !== null ? 'Edit Task' : 'Add New Task' }}
+        </h3>
+
+        <button class="close-btn" type="button" (click)="closeForm()">✕</button>
+      </div>
+
+      <form (ngSubmit)="saveTask()" #taskForm="ngForm">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Task Title</label>
+            <input
+              type="text"
+              name="title"
+              [(ngModel)]="newTask.title"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Project</label>
+
+            <select
+              name="projectId"
+              [(ngModel)]="newTask.projectId"
+              required>
+
+              <option [ngValue]="0" disabled>Select Project</option>
+
+              @for (project of projects; track project.id) {
+                <option [ngValue]="project.id">
+                  {{ project.name }}
+                </option>
+              }
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Assigned To</label>
+
+            <select
+              name="assignedTo"
+              [(ngModel)]="newTask.assignedTo"
+              required>
+
+              <option value="" disabled>Select Team Member</option>
+
+              @for (member of teamMembers; track member.id) {
+                @if (member.status === 'Active') {
+                  <option [value]="member.name">
+                    {{ member.name }} - {{ member.role }}
+                  </option>
+                }
+              }
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Due Date</label>
+
+            <input
+              type="date"
+              name="dueDate"
+              [(ngModel)]="newTask.dueDate"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Priority</label>
+
+            <select
+              name="priority"
+              [(ngModel)]="newTask.priority">
+
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Status</label>
+
+            <select
+              name="status"
+              [(ngModel)]="newTask.status">
+
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Description</label>
+
+            <textarea
+              name="description"
+              [(ngModel)]="newTask.description"
+              required>
+            </textarea>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="closeForm()">
+            Cancel
+          </button>
+
+          <button type="submit" class="save-btn">
+            {{ editingId !== null ? 'Update Task' : 'Save Task' }}
+          </button>
+
+        </div>
+
+      </form>
+    </div>
+  }
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Project</th>
+          <th>Assigned To</th>
+          <th>Priority</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (task of tasks; track task.id) {
+
+          <tr>
+
+            <td>
+              <strong>{{ task.title }}</strong>
+              <small>{{ task.description }}</small>
+            </td>
+
+            <td>{{ getProjectName(task.projectId) }}</td>
+
+            <td>{{ task.assignedTo }}</td>
+
+            <td>
+              <span
+                class="priority"
+                [class.high]="task.priority === 'High'"
+                [class.medium]="task.priority === 'Medium'"
+                [class.low]="task.priority === 'Low'">
+                {{ task.priority }}
+              </span>
+            </td>
+
+            <td>{{ task.dueDate }}</td>
+
+            <td>
+              <span
+                class="status"
+                [class.pending]="task.status === 'Pending'"
+                [class.in-progress]="task.status === 'In Progress'"
+                [class.completed]="task.status === 'Completed'">
+                {{ task.status }}
+              </span>
+            </td>
+
+            <td>
+              <div class="action-buttons">
+
+                <button
+                  class="edit-btn"
+                  (click)="editTask(task)">
+                  Edit
+                </button>
+
+                <button
+                  class="delete-btn"
+                  (click)="deleteTask(task.id)">
+                  Delete
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+        } @empty {
+
+          <tr>
+            <td colspan="7" class="empty-row">
+              No tasks found. Add your first task!
+            </td>
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

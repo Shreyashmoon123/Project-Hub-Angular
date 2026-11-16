@@ -1,0 +1,272 @@
+
+.settings-page {
+  padding: 28px;
+  color: #1e293b;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  font-size: 27px;
+  margin: 0 0 7px;
+}
+
+.page-header p,
+.section-description {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+}
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.settings-sidebar,
+.settings-content {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.settings-sidebar {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-sidebar button {
+  border: none;
+  background: transparent;
+  padding: 13px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 14px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.settings-sidebar button span {
+  margin-right: 9px;
+}
+
+.settings-sidebar button:hover,
+.settings-sidebar button.active {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.settings-content {
+  padding: 28px;
+  min-height: 480px;
+}
+
+.settings-content h2 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+.section-description {
+  margin-bottom: 26px;
+}
+
+.profile-avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #3b82f6;
+}
+
+.setting-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.setting-option h3 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.setting-option p {
+  color: #64748b;
+  font-size: 13px;
+  margin: 0;
+}
+
+.setting-option input {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.theme-options {
+  display: flex;
+  gap: 20px;
+}
+
+.theme-card {
+  width: 160px;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.theme-card.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.theme-card input {
+  accent-color: #2563eb;
+}
+
+.theme-preview {
+  height: 85px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.light-preview {
+  background: #f1f5f9;
+}
+
+.dark-preview {
+  background: #1e293b;
+}
+
+.theme-note {
+  color: #64748b;
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.bottom-actions {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 30px;
+  padding-top: 22px;
+}
+
+.save-btn,
+.reset-btn {
+  border: none;
+  padding: 11px 19px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #1d4ed8;
+}
+
+.reset-btn {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+@media (max-width: 800px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .settings-page {
+    padding: 15px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .settings-content {
+    padding: 18px;
+  }
+
+  .theme-options {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,174 @@
+
+<div class="settings-page">
+
+  <div class="page-header">
+    <div>
+      <h1>Settings</h1>
+      <p>Manage your account and application preferences.</p>
+    </div>
+
+    <button class="save-btn" (click)="saveSettings()">
+      Save Changes
+    </button>
+  </div>
+
+  <div class="settings-layout">
+
+    <aside class="settings-sidebar">
+      <button [class.active]="activeTab === 'profile'"
+        (click)="changeTab('profile')">
+        <span>👤</span> Profile
+      </button>
+
+      <button [class.active]="activeTab === 'general'"
+        (click)="changeTab('general')">
+        <span>⚙️</span> General
+      </button>
+
+      <button [class.active]="activeTab === 'notifications'"
+        (click)="changeTab('notifications')">
+        <span>🔔</span> Notifications
+      </button>
+
+      <button [class.active]="activeTab === 'appearance'"
+        (click)="changeTab('appearance')">
+        <span>🎨</span> Appearance
+      </button>
+    </aside>
+
+    <main class="settings-content">
+
+      @if (activeTab === 'profile') {
+        <section>
+          <h2>Profile Settings</h2>
+          <p class="section-description">Update your personal information.</p>
+
+          <div class="profile-avatar">{{ settings.name.charAt(0) }}</div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" [(ngModel)]="settings.name">
+            </div>
+
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" [(ngModel)]="settings.email">
+            </div>
+
+            <div class="form-group">
+              <label>Role</label>
+              <input type="text" [(ngModel)]="settings.role">
+            </div>
+
+            <div class="form-group">
+              <label>Company</label>
+              <input type="text" [(ngModel)]="settings.company">
+            </div>
+          </div>
+        </section>
+      }
+
+      @if (activeTab === 'general') {
+        <section>
+          <h2>General Settings</h2>
+          <p class="section-description">Manage your application preferences.</p>
+
+          <div class="form-group">
+            <label>Language</label>
+            <select [(ngModel)]="settings.language">
+              <option>English</option>
+              <option>Hindi</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Timezone</label>
+            <select [(ngModel)]="settings.timezone">
+              <option value="Asia/Kolkata">India (GMT +5:30)</option>
+              <option value="Europe/London">London (GMT +0)</option>
+              <option value="America/New_York">New York (GMT -5)</option>
+            </select>
+          </div>
+        </section>
+      }
+
+      @if (activeTab === 'notifications') {
+        <section>
+          <h2>Notification Settings</h2>
+          <p class="section-description">Choose which notifications you want to receive.</p>
+
+          <div class="setting-option">
+            <div>
+              <h3>Email Notifications</h3>
+              <p>Receive important updates through email.</p>
+            </div>
+            <input type="checkbox" [(ngModel)]="settings.emailNotifications">
+          </div>
+
+          <div class="setting-option">
+            <div>
+              <h3>Task Reminders</h3>
+              <p>Get reminders about upcoming task deadlines.</p>
+            </div>
+            <input type="checkbox" [(ngModel)]="settings.taskReminders">
+          </div>
+
+          <div class="setting-option">
+            <div>
+              <h3>Project Updates</h3>
+              <p>Receive notifications when projects are updated.</p>
+            </div>
+            <input type="checkbox" [(ngModel)]="settings.projectUpdates">
+          </div>
+
+          <div class="setting-option">
+            <div>
+              <h3>Weekly Reports</h3>
+              <p>Receive a weekly project summary.</p>
+            </div>
+            <input type="checkbox" [(ngModel)]="settings.weeklyReports">
+          </div>
+        </section>
+      }
+
+      @if (activeTab === 'appearance') {
+        <section>
+          <h2>Appearance</h2>
+          <p class="section-description">Customize your application appearance.</p>
+
+          <div class="theme-options">
+            <label class="theme-card" [class.selected]="settings.theme === 'light'">
+              <input type="radio" name="theme" value="light"
+                [(ngModel)]="settings.theme">
+              <div class="theme-preview light-preview">☀️</div>
+              <strong>Light Mode</strong>
+            </label>
+
+            <label class="theme-card" [class.selected]="settings.theme === 'dark'">
+              <input type="radio" name="theme" value="dark"
+                [(ngModel)]="settings.theme">
+              <div class="theme-preview dark-preview">🌙</div>
+              <strong>Dark Mode</strong>
+            </label>
+          </div>
+
+          <p class="theme-note">
+            Theme preference is saved, but full application-wide dark mode
+            can be connected separately.
+          </p>
+        </section>
+      }
+
+      <div class="bottom-actions">
+        <button class="reset-btn" (click)="resetSettings()">
+          Reset Settings
+        </button>
+        <button class="save-btn" (click)="saveSettings()">
+          Save Changes
+        </button>
+      </div>
+
+    </main>
+  </div>
+</div>

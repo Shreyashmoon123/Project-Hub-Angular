@@ -1,0 +1,162 @@
+
+.kanban-page {
+  width: 100%;
+}
+
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.kanban-header h2 {
+  font-size: 25px;
+  font-weight: 700;
+  color: #202b46;
+  margin-bottom: 6px;
+}
+
+.kanban-header p {
+  color: #8992a8;
+  font-size: 14px;
+}
+
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+.kanban-column {
+  background: #eef1f7;
+  border-radius: 12px;
+  padding: 18px;
+  min-height: 400px;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.column-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #303b55;
+}
+
+.column-header span {
+  background: #ffffff;
+  color: #667085;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.kanban-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(32, 43, 70, 0.05);
+  border: 1px solid #e9ecf2;
+}
+
+.kanban-card h4 {
+  color: #27334d;
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+
+.kanban-card p {
+  color: #8992a8;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.task-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.task-info span:first-child {
+  color: #59647b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.priority {
+  padding: 5px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.priority.high {
+  background: #ffe8e8;
+  color: #d64545;
+}
+
+.priority.medium {
+  background: #fff3dc;
+  color: #c58a20;
+}
+
+.priority.low {
+  background: #e3f6ed;
+  color: #269764;
+}
+
+.kanban-card label {
+  display: block;
+  font-size: 12px;
+  color: #7b8499;
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+
+.kanban-card select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #e1e5ed;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #344054;
+  font-size: 13px;
+  outline: none;
+}
+
+.kanban-card select:focus {
+  border-color: #6558d3;
+}
+
+.empty-message {
+  text-align: center;
+  color: #9aa2b3;
+  font-size: 13px;
+  padding: 35px 10px;
+}
+
+@media (max-width: 1100px) {
+  .kanban-board {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+
+  .kanban-column {
+    min-height: 250px;
+  }
+}

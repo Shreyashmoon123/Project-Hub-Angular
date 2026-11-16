@@ -1,0 +1,145 @@
+
+<div class="dashboard">
+
+  <div class="welcome-section">
+    <div>
+      <h1>Welcome back, Shreyash! 👋</h1>
+      <p>Here's what's happening with your projects today.</p>
+    </div>
+
+    <button class="date-button">
+      ▦ November 2026
+    </button>
+  </div>
+
+  <div class="stats-grid">
+
+    @for (stat of stats; track stat.title) {
+      <div class="stat-card">
+
+        <div class="stat-top">
+          <span>{{ stat.title }}</span>
+
+          <div class="stat-icon" [class]="stat.color">
+            {{ stat.icon }}
+          </div>
+        </div>
+
+        <div class="stat-bottom">
+          <h2>{{ stat.value }}</h2>
+          <span class="stat-change">{{ stat.change }}</span>
+        </div>
+
+        <p class="stat-description">Compared to last month</p>
+
+      </div>
+    }
+
+  </div>
+
+  <div class="section-card project-section">
+
+    <div class="section-header">
+      <div>
+        <h2>Project Overview</h2>
+        <p>Track the progress of your projects</p>
+      </div>
+
+      <a routerLink="/projects">View All →</a>
+    </div>
+
+    <div class="project-list">
+
+      @for (project of projects; track project.name) {
+        <div class="project-item">
+
+          <div class="project-info">
+            <div>
+              <h3>{{ project.name }}</h3>
+              <p>{{ project.category }}</p>
+            </div>
+
+            <span class="project-status"
+              [class.completed]="project.status === 'Completed'">
+              {{ project.status }}
+            </span>
+          </div>
+
+          <div class="progress-info">
+            <span>Progress</span>
+            <strong>{{ project.progress }}%</strong>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill"
+              [style.width.%]="project.progress">
+            </div>
+          </div>
+
+        </div>
+      }
+
+    </div>
+
+  </div>
+
+  
+  <div class="section-card tasks-section">
+
+    <div class="section-header">
+      <div>
+        <h2>Recent Tasks</h2>
+        <p>Latest updates from your workspace</p>
+      </div>
+
+      <a routerLink="/tasks">View All →</a>
+    </div>
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Task Name</th>
+            <th>Project</th>
+            <th>Priority</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (task of tasks; track task.title) {
+            <tr>
+              <td class="task-title">{{ task.title }}</td>
+              <td>{{ task.project }}</td>
+
+              <td>
+                <span class="priority"
+                  [class.high]="task.priority === 'High'"
+                  [class.medium]="task.priority === 'Medium'"
+                  [class.low]="task.priority === 'Low'">
+                  {{ task.priority }}
+                </span>
+              </td>
+
+              <td>
+                <span class="task-status"
+                  [class.done]="task.status === 'Completed'"
+                  [class.progress]="task.status === 'In Progress'">
+                  {{ task.status }}
+                </span>
+              </td>
+            </tr>
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
